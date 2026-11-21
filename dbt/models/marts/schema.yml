@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct_orders
+    description: "Core fact table for customer orders enriched with FX rates, weather conditions, and delay root-cause attribution."
+    columns:
+      - name: order_id
+        description: "Primary key for each order."
+        data_tests:
+          - unique
+          - not_null
+      - name: customer_id
+        description: "Foreign key to dim_customers."
+        data_tests:
+          - not_null
+      - name: delay_root_cause
+        description: "Categorized reason for delivery delay (Seller, Weather, Carrier, or On Time)."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - 'On Time'
+                  - 'In Transit / Not Delivered'
+                  - 'Delayed - Seller Late Dispatch'
+                  - 'Delayed - Weather Impact'
+                  - 'Delayed - Carrier / Distance'
+
+  - name: fct_order_items
+    description: "Line-item fact table with BRL and USD transaction values."
+    columns:
+      - name: order_id
+        data_tests:
+          - not_null
+      - name: product_id
+        data_tests:
+          - not_null
+
+  - name: dim_customers
+    description: "Customer dimension table with location and lifetime value in USD."
+    columns:
+      - name: customer_id
+        data_tests:
+          - unique
+          - not_null
+
+  - name: dim_products
+    description: "Product dimension table with English category names."
+    columns:
+      - name: product_id
+        data_tests:
+          - unique
+          - not_null

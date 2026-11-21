@@ -1,0 +1,29 @@
+version: 2
+sources:
+  - name: raw_ecom
+    database: grounded-will-513816-q4
+    schema: raw
+    description: "Raw data ingested from Olist CSVs, Frankfurter FX API, and Open-Meteo Weather API."
+    tables:
+      - name: olist_orders
+        description: "Core orders table containing timestamps and order status."
+      - name: olist_order_items
+        description: "Line items purchased within each order, including price and freight."
+      - name: olist_order_payments
+        description: "Payment methods and installment values for each order."
+      - name: olist_order_reviews
+        description: "Customer review scores (1-5) and comments."
+      - name: olist_customers
+        description: "Customer unique IDs and location details (city, state, zip)."
+      - name: olist_products
+        description: "Product catalog with category names and physical dimensions."
+      - name: olist_sellers
+        description: "Seller IDs and location details."
+      - name: olist_geolocation
+        description: "Brazilian zip codes mapped to latitude and longitude."
+      - name: product_category_name_translation
+        description: "Portuguese to English translation for product categories."
+      - name: frankfurter_fx
+        description: "Daily historical BRL to USD and EUR exchange rates."
+      - name: open_meteo_weather
+        description: "Daily historical temperature and precipitation for top Brazilian cities."

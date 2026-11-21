@@ -1,0 +1,16 @@
+version: 2
+
+exposures:
+  - name: olist_executive_dashboard
+    label: "Olist Executive Intelligence Dashboard"
+    type: dashboard
+    maturity: high
+    description: "One-page Power BI executive report tracking USD/BRL revenue, weather-induced delivery delays, and customer satisfaction."
+    depends_on:
+      - ref('fct_orders')
+      - ref('fct_order_items')
+      - ref('dim_customers')
+      - ref('dim_products')
+    owner:
+      name: NDARISHIZE Olivier
+      email: olivierndarishize85@gmail.com
